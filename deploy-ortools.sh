@@ -12,7 +12,7 @@ aws sts get-caller-identity
 aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin $ECR_HOST
 
 #Build docker image
-docker build --build-arg TARGET_ENV -t $ECR_HOST/$ECR_REPO:$GIT_COMMIT
+docker build -t $ECR_HOST/$ECR_REPO:$GIT_COMMIT .
 docker push $ECR_HOST/$ECR_REPO:$GIT_COMMIT
 
 # Create new revision for deployment
@@ -28,5 +28,5 @@ aws ecs register-task-definition --region "$REGION" --cli-input-json file://new-
 aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --task-definition $TASK_NAME --force-new-deployment >/dev/null
  
 #cleanup
-rm -f task-definition.json new-task-definition.jso
+rm -f task-definition.json new-task-definition.json
 
