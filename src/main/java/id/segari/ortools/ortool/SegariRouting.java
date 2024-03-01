@@ -1,5 +1,6 @@
 package id.segari.ortools.ortool;
 
+import com.google.ortools.Loader;
 import com.google.ortools.constraintsolver.*;
 import com.google.protobuf.Duration;
 import id.segari.ortools.dto.SegariRoutingDTO;
@@ -473,6 +474,6 @@ public class SegariRouting {
     }
 
     static {
-        OrToolsLoader.loadNativeLibraries();
+        Loader.loadNativeLibraries();
     }
 }
