@@ -1,4 +1,4 @@
-package id.segari.ortools.group;
+package id.segari.ortools.validation.group;
 
 public interface VrpArbitraryStartArbitraryFinish {
 }

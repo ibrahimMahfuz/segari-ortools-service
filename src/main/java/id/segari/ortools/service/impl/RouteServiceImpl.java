@@ -1,16 +1,10 @@
 package id.segari.ortools.service.impl;
 
 import id.segari.ortools.dto.RouteDTO;
-import id.segari.ortools.group.TspFixStartArbitraryFinish;
-import id.segari.ortools.group.VrpArbitraryStartArbitraryFinish;
-import id.segari.ortools.group.VrpSpStartArbitraryFinish;
 import id.segari.ortools.ortool.SegariRouting;
 import id.segari.ortools.service.RouteService;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.Map;
