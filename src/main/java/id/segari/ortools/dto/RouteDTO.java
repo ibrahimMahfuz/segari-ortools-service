@@ -1,7 +1,7 @@
 package id.segari.ortools.dto;
 
-import id.segari.ortools.validation.group.TspFixStartArbitraryFinish;
-import id.segari.ortools.validation.group.VrpSpStartArbitraryFinish;
+import id.segari.ortools.validation.group.VGTspFixStartArbitraryFinish;
+import id.segari.ortools.validation.group.VGVrpSpStartArbitraryFinish;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -13,22 +13,22 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class RouteDTO {
-    @NotNull
+    @NotNull(groups = {VGVrpSpStartArbitraryFinish.class, VGTspFixStartArbitraryFinish.class, VGTspFixStartArbitraryFinish.class})
     @Valid
     private SegariRoutingDTO route;
-    @NotNull
-    @Min(1)
+    @NotNull(groups = {VGVrpSpStartArbitraryFinish.class, VGTspFixStartArbitraryFinish.class, VGTspFixStartArbitraryFinish.class})
+    @Min(value = 1, groups = {VGVrpSpStartArbitraryFinish.class, VGTspFixStartArbitraryFinish.class, VGTspFixStartArbitraryFinish.class})
     private Integer maxDistanceBetweenOrder;
-    @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
-    @Min(1)
+    @NotNull(groups = {VGVrpSpStartArbitraryFinish.class, VGTspFixStartArbitraryFinish.class})
+    @Min(value = 1, groups = {VGVrpSpStartArbitraryFinish.class, VGTspFixStartArbitraryFinish.class})
     private Integer maxDistanceFromSp;
-    @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
-    @Min(1)
+    @NotNull(groups = {VGVrpSpStartArbitraryFinish.class, VGTspFixStartArbitraryFinish.class})
+    @Min(value = 1, groups = {VGVrpSpStartArbitraryFinish.class, VGTspFixStartArbitraryFinish.class})
     private Integer maxTurboOrderCount;
-    @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
-    @Min(1)
+    @NotNull(groups = {VGVrpSpStartArbitraryFinish.class, VGTspFixStartArbitraryFinish.class})
+    @Min(value = 1, groups = {VGVrpSpStartArbitraryFinish.class, VGTspFixStartArbitraryFinish.class})
     private Integer maxInstanOrderCount;
-    @NotNull(groups = VrpSpStartArbitraryFinish.class)
-    @Min(1)
+    @NotNull(groups = VGVrpSpStartArbitraryFinish.class)
+    @Min(value = 1, groups = VGVrpSpStartArbitraryFinish.class)
     private Integer alterVehicleNumberValue;
 }

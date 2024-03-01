@@ -1,4 +1,4 @@
 package id.segari.ortools.validation.group;
 
-public interface TspFixStartArbitraryFinish {
+public interface VGVrpSpStartArbitraryFinish {
 }

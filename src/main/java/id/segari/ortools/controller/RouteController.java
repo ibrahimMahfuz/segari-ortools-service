@@ -1,6 +1,7 @@
 package id.segari.ortools.controller;
 
 import id.segari.ortools.dto.RouteDTO;
+import id.segari.ortools.group.TspFixStartArbitraryFinish;
 import id.segari.ortools.service.RouteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Map;
 
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/routes")
@@ -34,7 +36,7 @@ public class RouteController {
 
     @PostMapping("/tsp/fix-start/{index}/arbitrary-finish")
     public ResponseEntity<Map<Integer, ArrayList<Long>>> tsp1(
-            @PathVariable int index,
+            @PathVariable Integer index,
             @RequestBody RouteDTO request
     ){
         return ResponseEntity.ok(routeService.tspWithFixStartAndArbitraryFinish(request, index));
