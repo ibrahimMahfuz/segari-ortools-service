@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Map;
 
-@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1/routes")
@@ -21,7 +20,7 @@ public class RouteController {
 
     @PostMapping("/vrp/sp-start/arbitrary-finish")
     public ResponseEntity<Map<Integer, ArrayList<Long>>> vrp1(
-            @RequestBody @Valid RouteDTO request
+            @RequestBody RouteDTO request
             ){
         return ResponseEntity.ok(routeService.vrpWithSpStartAndArbitraryFinish(request));
     }
