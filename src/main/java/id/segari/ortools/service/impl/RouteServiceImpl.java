@@ -41,9 +41,10 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public RouteResultDTO tspWithFixStartAndArbitraryFinish(RouteDTO dto, Integer index) {
-        SegariRouting segariRouting = SegariRouting.newTspWithStartAndFinish(dto.getRoute(), index)
-                .addDistanceBetweenOrderDimension(dto.getMaxDistanceBetweenOrder())
-                .addDistanceWithSpDimension(dto.getMaxDistanceFromSp());
+        SegariRouting segariRouting = SegariRouting.newTspWithStartAndFinish(dto.getRoute(), index);
+
+        if (Objects.nonNull(dto.getMaxDistanceBetweenOrder())) segariRouting.addDistanceBetweenOrderDimension(dto.getMaxDistanceBetweenOrder());
+        if (Objects.nonNull(dto.getMaxDistanceFromSp())) segariRouting.addDistanceWithSpDimension(dto.getMaxDistanceFromSp());
         if (Objects.nonNull(dto.getMaxInstanOrderCount())) segariRouting.addMaxInstanOrderCountDimension(dto.getMaxInstanOrderCount());
         if (Objects.nonNull(dto.getMaxTurboOrderCount())) segariRouting.addMaxTurboOrderCountDimension(dto.getMaxTurboOrderCount());
 

@@ -16,10 +16,10 @@ public class RouteDTO {
     @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     @Valid
     private SegariRoutingDTO route;
-    @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
+    @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     @Min(value = 1, groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     private Integer maxDistanceBetweenOrder;
-    @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
+    @NotNull(groups = VrpSpStartArbitraryFinish.class)
     @Min(value = 1, groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     private Integer maxDistanceFromSp;
     @NotNull(groups = VrpSpStartArbitraryFinish.class)
