@@ -6,6 +6,8 @@ import jakarta.validation.ValidatorFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
 
 @SpringBootApplication
 public class SegariOrtoolServiceApplication {
@@ -15,9 +17,13 @@ public class SegariOrtoolServiceApplication {
 	}
 
 	@Bean
-	public Validator getValidator(){
-		final ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-		return validatorFactory.getValidator();
+	public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
+		PropertySourcesPlaceholderConfigurer propsConfig
+				= new PropertySourcesPlaceholderConfigurer();
+		propsConfig.setLocation(new ClassPathResource("git.properties"));
+		propsConfig.setIgnoreResourceNotFound(true);
+		propsConfig.setIgnoreUnresolvablePlaceholders(true);
+		return propsConfig;
 	}
 
 }
