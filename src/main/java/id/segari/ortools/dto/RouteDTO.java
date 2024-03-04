@@ -28,7 +28,7 @@ public class RouteDTO {
     @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     @Min(value = 1, groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     private Integer maxInstanOrderCount;
-    @NotNull(groups = VrpSpStartArbitraryFinish.class)
     @Min(value = 1, groups = VrpSpStartArbitraryFinish.class)
     private Integer alterVehicleNumberValue;
+    private boolean isUsingRatioDimension;
 }

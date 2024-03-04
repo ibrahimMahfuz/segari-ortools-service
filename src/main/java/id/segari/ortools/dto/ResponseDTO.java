@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
-public class ResponseDTO {
-    Object body;
-    Object errors;
+public class ResponseDTO<T> {
+    T body;
+    String errors;
 }

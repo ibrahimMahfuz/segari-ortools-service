@@ -149,8 +149,8 @@ public class SegariRouting {
         return this;
     }
 
-    public Map<Integer, ArrayList<Long>> route(){
-        try{
+    public List<ArrayList<Long>> route(){
+        try {
             return handleRoute();
         }
         catch (Exception e){
@@ -161,7 +161,7 @@ public class SegariRouting {
         }
     }
 
-    private Map<Integer, ArrayList<Long>> handleRoute() {
+    private List<ArrayList<Long>> handleRoute() {
         fillRequiredAttributes();
         RoutingIndexManager manager = getRoutingIndexManager();
         RoutingModel routing = new RoutingModel(manager);
@@ -289,9 +289,9 @@ public class SegariRouting {
         return routing.solveWithParameters(searchParameters);
     }
 
-    private Map<Integer, ArrayList<Long>> getResult(RoutingModel routing, RoutingIndexManager manager,
+    private List<ArrayList<Long>> getResult(RoutingModel routing, RoutingIndexManager manager,
                                                                   Assignment solution) {
-        Map<Integer, ArrayList<Long>> results = new HashMap<>();
+        List<ArrayList<Long>> results = new ArrayList<>();
         for (int i = 0; i < this.vehicleNumbers; i++) {
             long index = routing.start(i);
 
@@ -305,18 +305,18 @@ public class SegariRouting {
 
             if (this.hasSetResultMustAtMaxOrderCount){
                 if (route.size() == this.maxOrderCount){
-                    putResult(route, results, i);
+                    putResult(route, results);
                 }
                 continue;
             }
-            putResult(route, results, i);
+            putResult(route, results);
         }
 
         return results;
     }
 
-    private static void putResult(ArrayList<Long> route, Map<Integer, ArrayList<Long>> results, int i) {
-        if (route.size() > 1) results.put(i, route);
+    private static void putResult(ArrayList<Long> route, List<ArrayList<Long>> results) {
+        if (route.size() > 1) results.add(route);
     }
 
     private void fillRequiredAttributes() {
