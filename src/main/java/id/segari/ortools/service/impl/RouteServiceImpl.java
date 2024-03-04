@@ -22,7 +22,7 @@ public class RouteServiceImpl implements RouteService {
                 .addDistanceWithSpDimension(dto.getMaxDistanceFromSp())
                 .addMaxInstanOrderCountDimension(dto.getMaxInstanOrderCount())
                 .addMaxTurboOrderCountDimension(dto.getMaxTurboOrderCount());
-        if (dto.isUsingRatioDimension()) segariRouting.addExtensionTurboInstanRatioDimension(1, 10);
+        if (Boolean.TRUE.equals(dto.getIsUsingRatioDimension())) segariRouting.addExtensionTurboInstanRatioDimension(1, 10);
         if (Objects.nonNull(dto.getAlterVehicleNumberValue())) segariRouting.alterVehicleNumbers(dto.getAlterVehicleNumberValue());
         return RouteResultDTO.builder()
                 .result(segariRouting.route())

@@ -3,6 +3,7 @@ package id.segari.ortools.dto;
 import id.segari.ortools.validation.group.TspFixStartArbitraryFinish;
 import id.segari.ortools.validation.group.VrpSpStartArbitraryFinish;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -30,5 +31,5 @@ public class RouteDTO {
     private Integer maxInstanOrderCount;
     @Min(value = 1, groups = VrpSpStartArbitraryFinish.class)
     private Integer alterVehicleNumberValue;
-    private boolean isUsingRatioDimension;
+    private Boolean isUsingRatioDimension;
 }
