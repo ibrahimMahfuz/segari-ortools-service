@@ -22,10 +22,10 @@ public class RouteDTO {
     @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     @Min(value = 1, groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     private Integer maxDistanceFromSp;
-    @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
+    @NotNull(groups = VrpSpStartArbitraryFinish.class)
     @Min(value = 1, groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     private Integer maxTurboOrderCount;
-    @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
+    @NotNull(groups = VrpSpStartArbitraryFinish.class)
     @Min(value = 1, groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     private Integer maxInstanOrderCount;
     @Min(value = 1, groups = VrpSpStartArbitraryFinish.class)
