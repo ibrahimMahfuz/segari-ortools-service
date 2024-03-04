@@ -60,22 +60,22 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>pl.project13.maven</groupId>
-				<artifactId>git-commit-id-plugin</artifactId>
-				<version>2.2.1</version>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<version>7.0.0</version>
 				<executions>
 					<execution>
-						<phase>validate</phase>
+						<id>get-the-git-infos</id>
 						<goals>
 							<goal>revision</goal>
 						</goals>
+						<phase>initialize</phase>
 					</execution>
 				</executions>
 				<configuration>
-					<dateFormat>yyyyMMdd-HHmmss</dateFormat>
-					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-					<generateGitPropertiesFile>false</generateGitPropertiesFile>
-					<injectAllReactorProjects>true</injectAllReactorProjects>
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					<generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+					<commitIdGenerationMode>full</commitIdGenerationMode>
 				</configuration>
 			</plugin>
 		</plugins>
