@@ -1,6 +1,7 @@
 package id.segari.ortools.dto;
 
 import id.segari.ortools.validation.group.TspFixStartArbitraryFinish;
+import id.segari.ortools.validation.group.VrpArbitraryStartArbitraryFinish;
 import id.segari.ortools.validation.group.VrpSpStartArbitraryFinish;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.AssertTrue;
@@ -14,11 +15,11 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class RouteDTO {
-    @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
+    @NotNull(groups = {VrpSpStartArbitraryFinish.class, VrpArbitraryStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     @Valid
     private SegariRoutingDTO route;
-    @NotNull(groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
-    @Min(value = 1, groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
+    @NotNull(groups = {VrpSpStartArbitraryFinish.class, VrpArbitraryStartArbitraryFinish.class})
+    @Min(value = 1, groups = {VrpSpStartArbitraryFinish.class, VrpArbitraryStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     private Integer maxDistanceBetweenOrder;
     @NotNull(groups = VrpSpStartArbitraryFinish.class)
     @Min(value = 1, groups = {VrpSpStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
