@@ -54,6 +54,7 @@ public class SegariRoute {
     private int maxLoadFactor;
     private int extensionRatio;
     private int turboInstanRatio;
+    private int extensionCount;
     @Setter(AccessLevel.PRIVATE)
     private int tspFixStartIndex;
 
@@ -136,11 +137,12 @@ public class SegariRoute {
         return this;
     }
 
-    public SegariRoute addExtensionTurboInstanRatioDimension(int extensionRatio, int turboInstanRatio){
+    public SegariRoute addExtensionTurboInstanRatioDimension(int extensionRatio, int turboInstanRatio, int extensionCount){
         this.hasExtensionTurboInstanRatioDimension = true;
-        if (extensionRatio <= 0 || turboInstanRatio <= 0) throw SegariRoutingErrors.invalidRoutingParameter();
+        if (extensionRatio <= 0 || turboInstanRatio <= 0 || extensionCount <= 0) throw SegariRoutingErrors.invalidRoutingParameter();
         this.extensionRatio = extensionRatio;
         this.turboInstanRatio = turboInstanRatio;
+        this.extensionCount = extensionCount;
         return this;
     }
 
@@ -353,8 +355,21 @@ public class SegariRoute {
         }
         if (this.hasExtensionTurboInstanRatioDimension) {
             this.extensionRatioDemands = extensionRatioDemands;
-            this.extensionRatioVehicleCapacities = initiateVehicleArray(this.vehicleNumbers, turboInstanRatio * maxOrderCount);
+            this.extensionRatioVehicleCapacities = initiateVehicleArray(this.vehicleNumbers, determineRatioCapacity());
         }
+    }
+
+    private int determineRatioCapacity() {
+        final int ex = Math.ceilDiv(this.extensionCount, this.vehicleNumbers);
+        int capacity = 0;
+        for (int i = 0; i < this.maxOrderCount; i++) {
+            if (i < ex){
+                capacity += this.extensionRatio;
+            }else {
+                capacity += this.turboInstanRatio;
+            }
+        }
+        return capacity;
     }
 
     private long[][] getDistanceMatrix(int length) {

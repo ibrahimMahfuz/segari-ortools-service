@@ -2,6 +2,7 @@ package id.segari.ortools.service.impl;
 
 import id.segari.ortools.dto.RouteDTO;
 import id.segari.ortools.dto.RouteResultDTO;
+import id.segari.ortools.error.SegariRoutingErrors;
 import id.segari.ortools.ortool.SegariRoute;
 import id.segari.ortools.service.RouteService;
 import org.springframework.context.annotation.Primary;
@@ -20,7 +21,10 @@ public class RouteServiceImpl implements RouteService {
                 .addDistanceWithSpDimension(dto.getMaxDistanceFromSp())
                 .addMaxInstanOrderCountDimension(dto.getMaxInstanOrderCount())
                 .addMaxTurboOrderCountDimension(dto.getMaxTurboOrderCount());
-        if (Boolean.TRUE.equals(dto.getIsUsingRatioDimension())) segariRoute.addExtensionTurboInstanRatioDimension(1, 10);
+        if (Boolean.TRUE.equals(dto.getIsUsingRatioDimension())) {
+            if (Objects.isNull(dto.getExtensionCount())) throw SegariRoutingErrors.invalidRoutingParameter();
+            segariRoute.addExtensionTurboInstanRatioDimension(1, 2, dto.getExtensionCount());
+        }
         if (Objects.nonNull(dto.getAlterVehicleNumberValue())) segariRoute.alterVehicleNumbers(dto.getAlterVehicleNumberValue());
         return RouteResultDTO.builder()
                 .result(segariRoute.route())

@@ -32,4 +32,5 @@ public class RouteDTO {
     @Min(value = 1, groups = VrpSpStartArbitraryFinish.class)
     private Integer alterVehicleNumberValue;
     private Boolean isUsingRatioDimension;
+    private Integer extensionCount;
 }
