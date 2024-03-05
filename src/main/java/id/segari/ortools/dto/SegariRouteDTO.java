@@ -12,9 +12,9 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class SegariRoutingDTO {
+public class SegariRouteDTO {
     @NotEmpty
-    private List<@NotNull SegariRoutingOrderDTO> orders;
+    private List<@NotNull SegariRouteOrderDTO> orders;
     @NotNull
     @Min(1)
     private Integer maxTotalDistanceInMeter;
