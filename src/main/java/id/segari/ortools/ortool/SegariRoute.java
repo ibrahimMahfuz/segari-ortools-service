@@ -309,7 +309,7 @@ public class SegariRoute {
                 final long thisRoute = manager.indexToNode(index);
                 final SegariRouteOrderDTO order = this.orders.get((int) thisRoute);
                 final long orderId = order.getId();
-                if (!hasExtension) hasExtension = order.getIsExtension();
+                if (!hasExtension) hasExtension = Boolean.TRUE.equals(order.getIsExtension());
                 if (orderId != -1L && orderId != -2L) route.add(orderId);
                 index = solution.value(routing.nextVar(index));
             }
