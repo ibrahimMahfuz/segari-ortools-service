@@ -370,7 +370,9 @@ public class SegariRoute {
     }
 
     private int determineRatioCapacity() {
-        final int ex = Math.ceilDiv(this.extensionCount, this.vehicleNumbers);
+        final int ex = (this.extensionCount >= this.maxOrderCount)
+                ? Math.ceilDiv(this.extensionCount, this.vehicleNumbers)
+                : this.extensionCount;
         int capacity = 0;
         for (int i = 0; i < this.maxOrderCount; i++) {
             if (i < ex){
