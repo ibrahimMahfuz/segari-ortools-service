@@ -27,6 +27,7 @@ public class SegariRoute {
     private boolean hasLoadFactorDimension = false;
     private boolean hasExtensionTurboInstanRatioDimension = false;
     private boolean hasSetResultMustAtMaxOrderCount = false;
+    private boolean hasResultMustContainExtension = false;
     private long[][] distanceMatrix;
     private int[] start;
     private int[] finish;
@@ -148,6 +149,11 @@ public class SegariRoute {
 
     public SegariRoute setResultMustAtMaxOrderCount(){
         this.hasSetResultMustAtMaxOrderCount = true;
+        return this;
+    }
+
+    public SegariRoute setResultMustContainExtension(){
+        this.hasResultMustContainExtension = true;
         return this;
     }
 
@@ -298,19 +304,23 @@ public class SegariRoute {
             long index = routing.start(i);
 
             ArrayList<Long> route = new ArrayList<>();
+            boolean hasExtension = false;
             while (!routing.isEnd(index)){
-                long thisRoute = manager.indexToNode(index);
-                long orderId = this.orders.get((int) thisRoute).getId();
+                final long thisRoute = manager.indexToNode(index);
+                final SegariRouteOrderDTO order = this.orders.get((int) thisRoute);
+                final long orderId = order.getId();
+                if (!hasExtension) hasExtension = order.getIsExtension();
                 if (orderId != -1L && orderId != -2L) route.add(orderId);
                 index = solution.value(routing.nextVar(index));
             }
 
             if (this.hasSetResultMustAtMaxOrderCount){
-                if (route.size() == this.maxOrderCount){
-                    putResult(route, results);
-                }
-                continue;
+                if (route.size() != this.maxOrderCount) continue;
             }
+            if (this.hasResultMustContainExtension){
+                if (!hasExtension) continue;
+            }
+
             putResult(route, results);
         }
 

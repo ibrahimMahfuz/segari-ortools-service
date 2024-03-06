@@ -24,6 +24,7 @@ public class RouteServiceImpl implements RouteService {
         if (Boolean.TRUE.equals(dto.getIsUsingRatioDimension())) {
             if (Objects.isNull(dto.getExtensionCount())) throw SegariRoutingErrors.invalidRoutingParameter();
             segariRoute.addExtensionTurboInstanRatioDimension(1, 2, dto.getExtensionCount());
+            segariRoute.setResultMustContainExtension();
         }
         if (Objects.nonNull(dto.getAlterVehicleNumberValue())) segariRoute.alterVehicleNumbers(dto.getAlterVehicleNumberValue());
         return RouteResultDTO.builder()
