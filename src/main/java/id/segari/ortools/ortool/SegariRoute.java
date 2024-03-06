@@ -480,7 +480,7 @@ public class SegariRoute {
         if (maxOrderCount <= 0) throw SegariRoutingErrors.invalidRoutingParameter();
         segariRoute.setMaxTotalDistanceInMeter(maxTotalDistanceInMeter);
         segariRoute.setMaxOrderCount(maxOrderCount);
-        segariRoute.setVehicleNumbers((orderCount < maxOrderCount) ? 1 : orderCount / maxOrderCount);
+        segariRoute.setVehicleNumbers((orderCount < maxOrderCount) ? 1 : Math.ceilDiv(orderCount, maxOrderCount));
     }
 
     private static void injectTspAttributes(SegariRoute segariRoute,
