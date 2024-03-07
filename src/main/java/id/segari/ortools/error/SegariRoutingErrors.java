@@ -3,6 +3,8 @@ package id.segari.ortools.error;
 import id.segari.ortools.exception.BaseException;
 import org.springframework.http.HttpStatus;
 
+import java.util.Arrays;
+
 public class SegariRoutingErrors {
     public static BaseException emptyOrder() {
         return BaseException.builder()
@@ -60,9 +62,9 @@ public class SegariRoutingErrors {
                 .build();
     }
 
-    public static BaseException invalidRoutingParameter() {
+    public static BaseException invalidRoutingParameter(String parameterNames) {
         return BaseException.builder()
-                .message("Invalid Routing Parameter")
+                .message("Invalid Routing Parameter: " + parameterNames)
                 .errorCode("TODO")
                 .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                 .build();
