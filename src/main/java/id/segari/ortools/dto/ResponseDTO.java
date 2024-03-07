@@ -8,7 +8,6 @@ import lombok.*;
 @Setter
 @Builder
 public class ResponseDTO<T> {
-    T body;
     T data;
     String errors;
 }

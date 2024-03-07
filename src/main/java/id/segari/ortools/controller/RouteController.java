@@ -27,10 +27,8 @@ public class RouteController {
     public ResponseDTO<RouteResultDTO> vrp1(
             @RequestBody RouteDTO request
     ){
-        final var data = routeService.vrpWithSpStartAndArbitraryFinish(request);
         return ResponseDTO.<RouteResultDTO>builder()
-                .body(data)
-                .data(data)
+                .data(routeService.vrpWithSpStartAndArbitraryFinish(request))
                 .build();
     }
 
@@ -38,10 +36,8 @@ public class RouteController {
     public ResponseDTO<RouteResultDTO> vrp2(
             @RequestBody RouteDTO request
     ){
-        final var data = routeService.vrpWithArbitraryStartAndArbitraryFinish(request);
         return ResponseDTO.<RouteResultDTO>builder()
-                .body(data)
-                .data(data)
+                .data(routeService.vrpWithArbitraryStartAndArbitraryFinish(request))
                 .build();
     }
 
@@ -51,10 +47,8 @@ public class RouteController {
             @RequestBody RouteDTO request
     ){
 
-        final var data = routeService.tspWithFixStartAndArbitraryFinish(request, index);
         return ResponseDTO.<RouteResultDTO>builder()
-                .body(data)
-                .data(data)
+                .data(routeService.tspWithFixStartAndArbitraryFinish(request, index))
                 .build();
     }
 
