@@ -1,45 +1,58 @@
 package id.segari.ortools.service.impl;
 
 import id.segari.ortools.dto.RouteDTO;
-import id.segari.ortools.ortool.SegariRouting;
+import id.segari.ortools.dto.RouteResultDTO;
+import id.segari.ortools.error.SegariRoutingErrors;
+import id.segari.ortools.ortool.SegariRoute;
 import id.segari.ortools.service.RouteService;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.Objects;
 
 @Service
 @Primary
 public class RouteServiceImpl implements RouteService {
 
     @Override
-    public Map<Integer, ArrayList<Long>> vrpWithSpStartAndArbitraryFinish(RouteDTO dto) {
-        return SegariRouting.newVrpStartFromSpAndArbitraryFinish(dto.getRoute())
-                .addDistanceBetweenNodeDimension(dto.getMaxDistanceBetweenOrder())
-                .setResultMustAtMaxOrderCount()
-                .route();
-    }
-
-    @Override
-    public Map<Integer, ArrayList<Long>> vrpWithArbitraryStartAndArbitraryFinish(RouteDTO dto) {
-        return SegariRouting.newVrpWithArbitraryStartAndFinish(dto.getRoute())
-                .addDistanceBetweenOrderDimension(dto.getMaxDistanceBetweenOrder())
-                .addDistanceWithSpDimension(dto.getMaxDistanceFromSp())
-                .addExtensionTurboInstanRatioDimension(1, 10)
-                .addMaxInstanOrderCountDimension(dto.getMaxInstanOrderCount())
-                .addMaxTurboOrderCountDimension(dto.getMaxTurboOrderCount())
-                .alterVehicleNumbers(dto.getAlterVehicleNumberValue())
-                .route();
-    }
-
-    @Override
-    public Map<Integer, ArrayList<Long>> tspWithFixStartAndArbitraryFinish(RouteDTO dto, Integer index) {
-        return SegariRouting.newTspWithStartAndFinish(dto.getRoute(), index)
+    public RouteResultDTO vrpWithSpStartAndArbitraryFinish(RouteDTO dto) {
+        SegariRoute segariRoute = SegariRoute.newVrpStartFromSpAndArbitraryFinish(dto.getRoute())
                 .addDistanceBetweenOrderDimension(dto.getMaxDistanceBetweenOrder())
                 .addDistanceWithSpDimension(dto.getMaxDistanceFromSp())
                 .addMaxInstanOrderCountDimension(dto.getMaxInstanOrderCount())
-                .addMaxTurboOrderCountDimension(dto.getMaxTurboOrderCount())
-                .route();
+                .addMaxTurboOrderCountDimension(dto.getMaxTurboOrderCount());
+        if (Boolean.TRUE.equals(dto.getIsUsingRatioDimension())) {
+            if (Objects.isNull(dto.getExtensionCount())) throw SegariRoutingErrors.invalidRoutingParameter("getExtensionCount in vrpWithSpStartAndArbitraryFinish");
+            segariRoute.addExtensionTurboInstanRatioDimension(1, 2, dto.getExtensionCount());
+            segariRoute.setResultMustContainExtension();
+        }
+        if (Objects.nonNull(dto.getAlterVehicleNumberValue())) segariRoute.alterVehicleNumbers(dto.getAlterVehicleNumberValue());
+        return RouteResultDTO.builder()
+                .result(segariRoute.route())
+                .build();
+    }
+
+    @Override
+    public RouteResultDTO vrpWithArbitraryStartAndArbitraryFinish(RouteDTO dto) {
+        return RouteResultDTO.builder()
+                .result(SegariRoute.newVrpWithArbitraryStartAndFinish(dto.getRoute())
+                        .addDistanceBetweenNodeDimension(dto.getMaxDistanceBetweenOrder())
+                        .setResultMustAtMaxOrderCount()
+                        .route())
+                .build();
+    }
+
+    @Override
+    public RouteResultDTO tspWithFixStartAndArbitraryFinish(RouteDTO dto, Integer index) {
+        SegariRoute segariRoute = SegariRoute.newTspWithStartAndFinish(dto.getRoute(), index);
+
+        if (Objects.nonNull(dto.getMaxDistanceBetweenOrder())) segariRoute.addDistanceBetweenOrderDimension(dto.getMaxDistanceBetweenOrder());
+        if (Objects.nonNull(dto.getMaxDistanceFromSp())) segariRoute.addDistanceWithSpDimension(dto.getMaxDistanceFromSp());
+        if (Objects.nonNull(dto.getMaxInstanOrderCount())) segariRoute.addMaxInstanOrderCountDimension(dto.getMaxInstanOrderCount());
+        if (Objects.nonNull(dto.getMaxTurboOrderCount())) segariRoute.addMaxTurboOrderCountDimension(dto.getMaxTurboOrderCount());
+
+        return RouteResultDTO.builder()
+                .result(segariRoute.route())
+                .build();
     }
 }

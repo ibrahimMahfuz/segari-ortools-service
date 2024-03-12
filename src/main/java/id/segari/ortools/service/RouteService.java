@@ -1,6 +1,7 @@
 package id.segari.ortools.service;
 
 import id.segari.ortools.dto.RouteDTO;
+import id.segari.ortools.dto.RouteResultDTO;
 import id.segari.ortools.validation.group.TspFixStartArbitraryFinish;
 import id.segari.ortools.validation.group.VrpArbitraryStartArbitraryFinish;
 import id.segari.ortools.validation.group.VrpSpStartArbitraryFinish;
@@ -14,9 +15,9 @@ import java.util.Map;
 @Validated
 public interface RouteService {
     @Validated(VrpSpStartArbitraryFinish.class)
-    Map<Integer, ArrayList<Long>> vrpWithSpStartAndArbitraryFinish(@Valid RouteDTO dto);
+    RouteResultDTO vrpWithSpStartAndArbitraryFinish(@Valid RouteDTO dto);
     @Validated(VrpArbitraryStartArbitraryFinish.class)
-    Map<Integer, ArrayList<Long>> vrpWithArbitraryStartAndArbitraryFinish(@Valid RouteDTO dto);
+    RouteResultDTO vrpWithArbitraryStartAndArbitraryFinish(@Valid RouteDTO dto);
     @Validated(TspFixStartArbitraryFinish.class)
-    Map<Integer, ArrayList<Long>> tspWithFixStartAndArbitraryFinish(@Valid RouteDTO dto, @NotNull Integer index);
+    RouteResultDTO tspWithFixStartAndArbitraryFinish(@Valid RouteDTO dto, @NotNull Integer index);
 }
