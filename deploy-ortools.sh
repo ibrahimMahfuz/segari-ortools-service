@@ -16,9 +16,10 @@ docker build -t $ECR_HOST/$ECR_REPO:$GIT_COMMIT .
 docker push $ECR_HOST/$ECR_REPO:$GIT_COMMIT
 
 # Create new revision for deployment
-TASK_NAME="segari-ortools"
-SERVICE_NAME="segari-ortools"
-CLUSTER_NAME="$CLUSTER_NAME" # CLUSTER_NAME exported from jenkins job
+CLUSTER_NAME="$CLUSTER_NAME"
+ # CLUSTER_NAME exported from jenkins job
+TASK_NAME="segari-ortools-$CLUSTER_NAME"
+SERVICE_NAME="segari-ortools-$CLUSTER_NAME"
 REGION="ap-southeast-1"
 
 NEW_IMAGE="$ECR_HOST/$ECR_REPO:$GIT_COMMIT"
