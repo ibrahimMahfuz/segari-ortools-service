@@ -23,7 +23,7 @@ public class RouteServiceImpl implements RouteService {
                 .addMaxTurboOrderCountDimension(dto.getMaxTurboOrderCount());
         if (Boolean.TRUE.equals(dto.getIsUsingRatioDimension())) {
             if (Objects.isNull(dto.getExtensionCount())) throw SegariRoutingErrors.invalidRoutingParameter("getExtensionCount in vrpWithSpStartAndArbitraryFinish");
-            segariRoute.addExtensionTurboInstanRatioDimension(1, 2, dto.getExtensionCount());
+            segariRoute.addExtensionTurboInstanRatioDimension(1, 100, dto.getExtensionCount());
             segariRoute.setResultMustContainExtension();
         }
         if (Objects.nonNull(dto.getAlterVehicleNumberValue())) segariRoute.alterVehicleNumbers(dto.getAlterVehicleNumberValue());
