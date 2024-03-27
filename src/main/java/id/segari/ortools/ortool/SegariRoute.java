@@ -26,7 +26,8 @@ public class SegariRoute {
     private boolean hasMaxTurboOrderCountDimension = false;
     private boolean hasLoadFactorDimension = false;
     private boolean hasExtensionTurboInstanRatioDimension = false;
-    private boolean hasSetResultMustAtMaxOrderCount = false;
+    private boolean hasSetResultMinimum = false;
+    private int minimumResult = 0;
     private boolean hasResultMustContainExtension = false;
     private long[][] distanceMatrix;
     private int[] start;
@@ -148,8 +149,9 @@ public class SegariRoute {
         return this;
     }
 
-    public SegariRoute setResultMustAtMaxOrderCount(){
-        this.hasSetResultMustAtMaxOrderCount = true;
+    public SegariRoute setResultMinimum(int minimum){
+        this.hasSetResultMinimum = true;
+        this.minimumResult = minimum;
         return this;
     }
 
@@ -315,8 +317,8 @@ public class SegariRoute {
                 index = solution.value(routing.nextVar(index));
             }
 
-            if (this.hasSetResultMustAtMaxOrderCount){
-                if (route.size() != this.maxOrderCount) continue;
+            if (this.hasSetResultMinimum){
+                if (route.size() < this.minimumResult) continue;
             }
             if (this.hasResultMustContainExtension){
                 if (!hasExtension) continue;
