@@ -150,6 +150,7 @@ public class SegariRoute {
     }
 
     public SegariRoute setResultMinimum(int minimum){
+        if (minimum > maxOrderCount) throw SegariRoutingErrors.invalidRoutingParameter("minimumResult cannot greater than maxOrderCount");
         this.hasSetResultMinimum = true;
         this.minimumResult = minimum;
         return this;
