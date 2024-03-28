@@ -25,8 +25,9 @@ public class RouteServiceImpl implements RouteService {
             if (Objects.isNull(dto.getExtensionCount())) throw SegariRoutingErrors.invalidRoutingParameter("getExtensionCount in vrpWithSpStartAndArbitraryFinish");
             segariRoute.addExtensionTurboInstanRatioDimension(1, 100, dto.getExtensionCount());
             segariRoute.setResultMustContainExtension();
+            segariRoute.setResultMinimum(4);
+            segariRoute.alterVehicleNumbers(dto.getExtensionCount());
         }
-        if (Objects.nonNull(dto.getAlterVehicleNumberValue())) segariRoute.alterVehicleNumbers(dto.getAlterVehicleNumberValue());
         return RouteResultDTO.builder()
                 .result(segariRoute.route())
                 .build();
@@ -37,7 +38,7 @@ public class RouteServiceImpl implements RouteService {
         return RouteResultDTO.builder()
                 .result(SegariRoute.newVrpWithArbitraryStartAndFinish(dto.getRoute())
                         .addDistanceBetweenNodeDimension(dto.getMaxDistanceBetweenOrder())
-                        .setResultMustAtMaxOrderCount()
+                        .setResultMinimum(dto.getRoute().getMaxOrderCount())
                         .route())
                 .build();
     }
