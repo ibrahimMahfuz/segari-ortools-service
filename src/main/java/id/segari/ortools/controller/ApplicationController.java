@@ -12,14 +12,9 @@ import java.time.format.DateTimeFormatter;
 @RestController
 @RequestMapping("/v1/applications")
 public class ApplicationController {
-    private final String buildAt;
-
-    public ApplicationController() {
-        buildAt = ZonedDateTime.now(ZoneId.of("UTC+7")).format(DateTimeFormatter.ISO_DATE_TIME);
-    }
 
     @GetMapping("/versions")
     public String getVersions(){
-        return "build at: " + buildAt;
+        return "implement vrp 2nd run: adjust vehicle number & extension distribution per vehicle";
     }
 }
