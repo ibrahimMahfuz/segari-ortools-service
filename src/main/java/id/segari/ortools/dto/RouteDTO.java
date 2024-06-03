@@ -37,7 +37,7 @@ public class RouteDTO {
     @Override
     public String toString() {
         return "{" +
-                "route:" + route +
+                "route:" + route.toString() +
                 ", maxDistanceBetweenOrder:" + maxDistanceBetweenOrder +
                 ", maxDistanceFromSp:" + maxDistanceFromSp +
                 ", maxTurboOrderCount:" + maxTurboOrderCount +
