@@ -13,20 +13,19 @@ import java.time.format.DateTimeFormatter;
 @RestController
 @RequestMapping("/v1/applications")
 public class ApplicationController {
-    private final String latestBuildAt;
+    private final String buildAt;
     private final GitProperties gitProperties;
 
     public ApplicationController(GitProperties gitProperties) {
         this.gitProperties = gitProperties;
-        latestBuildAt = ZonedDateTime.now(ZoneId.of("UTC+7")).format(DateTimeFormatter.ISO_DATE_TIME);
+        buildAt = ZonedDateTime.now(ZoneId.of("UTC+7")).format(DateTimeFormatter.ISO_DATE_TIME);
     }
 
     @GetMapping("/versions")
     public ApplicationInfoDTO getVersions(){
         return ApplicationInfoDTO.builder()
                 .commitId(gitProperties.getCommitId())
-                .latestBuildAt(latestBuildAt)
-                .branch(gitProperties.getBranch())
+                .buildAt(buildAt)
                 .build();
     }
 }

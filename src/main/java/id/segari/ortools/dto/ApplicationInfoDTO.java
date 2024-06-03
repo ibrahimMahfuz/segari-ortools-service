@@ -9,6 +9,5 @@ import lombok.*;
 @Builder
 public class ApplicationInfoDTO {
     private String commitId;
-    private String latestBuildAt;
-    private String branch;
+    private String buildAt;
 }
