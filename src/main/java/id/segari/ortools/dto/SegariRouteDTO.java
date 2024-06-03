@@ -15,7 +15,6 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@ToString
 public class SegariRouteDTO {
     @NotEmpty(groups = {VrpSpStartArbitraryFinish.class, VrpArbitraryStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     private List<@NotNull(groups = {VrpSpStartArbitraryFinish.class, VrpArbitraryStartArbitraryFinish.class, TspFixStartArbitraryFinish.class}) SegariRouteOrderDTO> orders;
@@ -25,4 +24,13 @@ public class SegariRouteDTO {
     @NotNull(groups = {VrpSpStartArbitraryFinish.class, VrpArbitraryStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     @Min(value = 1, groups = {VrpSpStartArbitraryFinish.class, VrpArbitraryStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     private Integer maxOrderCount;
+
+    @Override
+    public String toString() {
+        return "{" +
+                "orders:" + orders +
+                ", maxTotalDistanceInMeter:" + maxTotalDistanceInMeter +
+                ", maxOrderCount:" + maxOrderCount +
+                '}';
+    }
 }

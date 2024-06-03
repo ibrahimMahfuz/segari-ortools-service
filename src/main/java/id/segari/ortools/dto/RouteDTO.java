@@ -13,7 +13,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString
 public class RouteDTO {
     @NotNull(groups = {VrpSpStartArbitraryFinish.class, VrpArbitraryStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     @Valid
@@ -34,4 +33,18 @@ public class RouteDTO {
     private Integer alterVehicleNumberValue;
     private Boolean isUsingRatioDimension;
     private Integer extensionCount;
+
+    @Override
+    public String toString() {
+        return "{" +
+                "route:" + route +
+                ", maxDistanceBetweenOrder:" + maxDistanceBetweenOrder +
+                ", maxDistanceFromSp:" + maxDistanceFromSp +
+                ", maxTurboOrderCount:" + maxTurboOrderCount +
+                ", maxInstanOrderCount:" + maxInstanOrderCount +
+                ", alterVehicleNumberValue:" + alterVehicleNumberValue +
+                ", isUsingRatioDimension:" + isUsingRatioDimension +
+                ", extensionCount:" + extensionCount +
+                '}';
+    }
 }
