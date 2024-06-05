@@ -5,6 +5,7 @@ import id.segari.ortools.dto.RouteDTO;
 import id.segari.ortools.dto.RouteResultDTO;
 import id.segari.ortools.service.RouteService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.util.stream.Stream;
 @Validated
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/v1/routes")
 public class RouteController {
 
@@ -27,6 +29,7 @@ public class RouteController {
     public ResponseDTO<RouteResultDTO> vrp1(
             @RequestBody RouteDTO request
     ){
+        log.info("dto for /vrp/sp-start/arbitrary-finish: {}", request);
         return ResponseDTO.<RouteResultDTO>builder()
                 .data(routeService.vrpWithSpStartAndArbitraryFinish(request))
                 .build();
@@ -36,6 +39,7 @@ public class RouteController {
     public ResponseDTO<RouteResultDTO> vrp2(
             @RequestBody RouteDTO request
     ){
+        log.info("dto for /vrp/arbitrary-start/arbitrary-finish: {}", request);
         return ResponseDTO.<RouteResultDTO>builder()
                 .data(routeService.vrpWithArbitraryStartAndArbitraryFinish(request))
                 .build();
@@ -46,7 +50,7 @@ public class RouteController {
             @PathVariable Integer index,
             @RequestBody RouteDTO request
     ){
-
+        log.info("dto for /tsp/fix-start/{index}/arbitrary-finish: {}", request);
         return ResponseDTO.<RouteResultDTO>builder()
                 .data(routeService.tspWithFixStartAndArbitraryFinish(request, index))
                 .build();

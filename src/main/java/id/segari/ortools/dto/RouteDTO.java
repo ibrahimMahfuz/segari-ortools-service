@@ -33,4 +33,18 @@ public class RouteDTO {
     private Integer alterVehicleNumberValue;
     private Boolean isUsingRatioDimension;
     private Integer extensionCount;
+
+    @Override
+    public String toString() {
+        return "{" +
+                "route:" + route.toString() +
+                ", maxDistanceBetweenOrder:" + maxDistanceBetweenOrder +
+                ", maxDistanceFromSp:" + maxDistanceFromSp +
+                ", maxTurboOrderCount:" + maxTurboOrderCount +
+                ", maxInstanOrderCount:" + maxInstanOrderCount +
+                ", alterVehicleNumberValue:" + alterVehicleNumberValue +
+                ", isUsingRatioDimension:" + isUsingRatioDimension +
+                ", extensionCount:" + extensionCount +
+                '}';
+    }
 }

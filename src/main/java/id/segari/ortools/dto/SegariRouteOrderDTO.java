@@ -23,6 +23,18 @@ public class SegariRouteOrderDTO {
     @NotNull(groups = {VrpSpStartArbitraryFinish.class, VrpArbitraryStartArbitraryFinish.class, TspFixStartArbitraryFinish.class})
     private final Boolean isInstan;
 
+    @Override
+    public String toString() {
+        return "{" +
+                "id:" + id +
+                ", type:" + type +
+                ", latitude:" + latitude +
+                ", longitude:" + longitude +
+                ", isExtension:" + isExtension +
+                ", isTurbo:" + isTurbo +
+                ", isInstan:" + isInstan +
+                '}';
+    }
 
     public enum SegariRouteOrderEnum {
         DUMMY, // id = -1
