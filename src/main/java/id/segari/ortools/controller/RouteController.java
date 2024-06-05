@@ -50,7 +50,7 @@ public class RouteController {
             @PathVariable Integer index,
             @RequestBody RouteDTO request
     ){
-        log.info("dto for /tsp/fix-start/{index}/arbitrary-finish: {}", request);
+        log.info("dto for /tsp/fix-start/{}/arbitrary-finish: {}", index, request);
         return ResponseDTO.<RouteResultDTO>builder()
                 .data(routeService.tspWithFixStartAndArbitraryFinish(request, index))
                 .build();
