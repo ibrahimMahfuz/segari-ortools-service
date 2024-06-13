@@ -3,8 +3,6 @@ package id.segari.ortools.error;
 import id.segari.ortools.exception.BaseException;
 import org.springframework.http.HttpStatus;
 
-import java.util.Arrays;
-
 public class SegariRoutingErrors {
     public static BaseException emptyOrder() {
         return BaseException.builder()

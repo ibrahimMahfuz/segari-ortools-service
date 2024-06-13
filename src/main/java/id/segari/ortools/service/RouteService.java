@@ -9,9 +9,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 @Validated
 public interface RouteService {
     @Validated(VrpSpStartArbitraryFinish.class)
